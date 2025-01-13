@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device Tracker</title>
+</head>
+<body>
+  <h1>Device Location Tracker</h1>
+  <button id="trackButton">Track Location</button>
+  <div id="output"></div>
+
+  <script>
+    const trackButton = document.getElementById('trackButton');
+    const output = document.getElementById('output');
+
+    // Function to handle geolocation success
+    const successCallback = (position) => {
+      const { latitude, longitude } = position.coords;
+      output.innerHTML = `
+        <p>Latitude: ${latitude}</p>
+        <p>Longitude: ${longitude}</p>
+        <p>Accuracy: ${position.coords.accuracy} meters</p>
+      `;
+      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    };
+
+    // Function to handle geolocation error
+    const errorCallback = (error) => {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          output.innerHTML = "<p>Location access denied by the user.</p>";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          output.innerHTML = "<p>Location information is unavailable.</p>";
+          break;
+        case error.TIMEOUT:
+          output.innerHTML = "<p>The request to get user location timed out.</p>";
+          break;
+        default:
+          output.innerHTML = "<p>An unknown error occurred.</p>";
+          break;
+      }
+    };
+
+    // Attach event listener to the button
+    trackButton.addEventListener('click', () => {
+      if (navigator.geolocation) {
+        output.innerHTML = "<p>Fetching location...</p>";
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      } else {
+        output.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
+      }
+    });
+  </script>
+</body>
+</html>
