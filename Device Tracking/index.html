@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelacak Perangkat</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <h1>Pelacak Perangkat</h1>
+    <form id="phoneForm">
+        <label for="phoneNumber">Nomor Telepon:</label>
+        <input type="text" id="phoneNumber" placeholder="Masukkan nomor telepon" required>
+        <button type="submit">Kirim Kode OTP</button>
+    </form>
+
+    <form id="otpForm" style="display: none;">
+        <label for="otp">Kode OTP:</label>
+        <input type="text" id="otp" placeholder="Masukkan kode OTP" required>
+        <button type="submit">Verifikasi</button>
+    </form>
+
+    <div id="trackSection" style="display: none;">
+        <button id="trackButton">Lacak Lokasi Saya</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
